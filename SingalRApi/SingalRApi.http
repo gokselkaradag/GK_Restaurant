@@ -1,0 +1,6 @@
+@SingalRApi_HostAddress = http://localhost:5250
+
+GET {{SingalRApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
