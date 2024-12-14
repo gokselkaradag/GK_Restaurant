@@ -1,3 +1,9 @@
+using SingalR.BusinessLayer.Abstract;
+using SingalR.BusinessLayer.Concrete;
+using SingalR.DataAccessLayer.Abstract;
+using SingalR.DataAccessLayer.Concrete;
+using SingalR.DataAccessLayer.EntityFramework;
+using System.Reflection;
 
 namespace SingalRApi
 {
@@ -6,6 +12,24 @@ namespace SingalRApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<SingalRContext>();
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            builder.Services.AddScoped<IAboutService, AboutManager>();
+            builder.Services.AddScoped<IAbuotDal, EfAboutDal>();
+
+            builder.Services.AddScoped<IBookingService, BookingManager>();
+            builder.Services.AddScoped<IBookingDal, EfBookingDal>();
+
+            builder.Services.AddScoped<ICategoryService, CategoryManager>();
+            builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+
+            builder.Services.AddScoped<IContactService, ContactManager>();
+            builder.Services.AddScoped<IContactDal, EfContactDal>();
+
+            builder.Services.AddScoped<IDiscountService, DiscountManager>();
+            builder.Services.AddScoped<IDiscountDal, EfDiscountDal>();
 
             // Add services to the container.
 
