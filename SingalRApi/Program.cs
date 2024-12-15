@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using SingalR.BusinessLayer.Abstract;
 using SingalR.BusinessLayer.Concrete;
 using SingalR.DataAccessLayer.Abstract;
@@ -49,12 +50,18 @@ namespace SingalRApi
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"));
             }
 
             app.UseHttpsRedirection();

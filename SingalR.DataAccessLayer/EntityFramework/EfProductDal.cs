@@ -1,4 +1,5 @@
-﻿using SingalR.DataAccessLayer.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using SingalR.DataAccessLayer.Abstract;
 using SingalR.DataAccessLayer.Concrete;
 using SingalR.DataAccessLayer.Repositories;
 using SingalR.EntityLayer.Entities;
@@ -14,6 +15,13 @@ namespace SingalR.DataAccessLayer.EntityFramework
     {
         public EfProductDal(SingalRContext context) : base(context)
         {
+        }
+
+        public List<Product> GetProductsWithCategories()
+        {
+            var context = new SingalRContext();
+            var values = context.Products.Include(x =>  x.Category).ToList();
+            return values;
         }
     }
 }

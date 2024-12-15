@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SingalR.BusinessLayer.Abstract;
+using SingalR.DataAccessLayer.Concrete;
 using SingalR.DtoLayer.ProductDto;
 using SingalR.EntityLayer.Entities;
 
@@ -25,6 +27,24 @@ namespace SingalRApi.Controllers
         {
             var value = _mapper.Map<List<ResultProductDto>>(_productService.TGetListAll());
             return Ok(value);
+        }
+
+        [HttpGet("ProductListWithCategory")]
+        public IActionResult ProductListWithCategory()
+        {
+            var context = new SingalRContext();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
+            {
+                Description = y.Description,
+                ImageUrl = y.ImageUrl,
+                Price = y.Price,
+                ProductID = y.ProductID,
+                ProductName = y.ProductName,
+                ProductStatus = y.ProductStatus,
+                CategoryName = y.Category.CategoryName
+            });
+            return Ok(values.ToList());
+
         }
 
         [HttpPost]

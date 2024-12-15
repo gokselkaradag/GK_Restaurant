@@ -66,7 +66,7 @@ namespace SingalRApi.Controllers
             return Ok("Müşteri Yorum Bilgisi Güncellendi");
         }
 
-        [HttpGet("")]
+        [HttpGet("GetTestimonial")]
         public IActionResult GetTestimonial(int id)
         {
             var values = _testimonialService.TGetByID(id);
