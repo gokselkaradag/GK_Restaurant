@@ -50,43 +50,28 @@ namespace SingalRApi.Controllers
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            _productService.TAdd(new Product()
-            {
-                Description = createProductDto.Description,
-                ImageUrl = createProductDto.ImageUrl,
-                Price = createProductDto.Price,
-                ProductStatus = createProductDto.ProductStatus,
-                ProductName = createProductDto.ProductName,
-            });
-
-            return Ok("Ürünler Eklendi");
+            var value = _mapper.Map<Product>(createProductDto);
+            _productService.TAdd(value);
+            return Ok("Ürün Bilgisi Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetByID(id);
             _productService.TDelete(value);
-            return Ok("Ürünler Silindi");
+            return Ok("Ürün Bilgisi Silindi");
         }
 
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            _productService.TUpdate(new Product()
-            { 
-                ProductID = updateProductDto.ProductID,
-                Description = updateProductDto.Description,
-                ImageUrl = updateProductDto.ImageUrl,
-                Price = updateProductDto.Price,
-                ProductStatus = updateProductDto.ProductStatus,
-                ProductName = updateProductDto.ProductName,
-            });
-
-            return Ok("Ürünler Güncellendi");
+            var value = _mapper.Map<Product>(updateProductDto);
+            _productService.TUpdate(value);
+            return Ok("Ürün Bilgisi Güncellendi");
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
             var values = _productService.TGetByID(id);
