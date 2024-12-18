@@ -40,7 +40,7 @@ namespace SingalRApi.Controllers
             return Ok("Başarılı Bir Şekilde Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {
             var value = _bookingService.TGetByID(id);
@@ -65,7 +65,7 @@ namespace SingalRApi.Controllers
             return Ok("Başarılı Bir Şekilde Güncellendi");
         }
 
-        [HttpGet("GetBooking")]
+        [HttpGet("{id}")]
         public IActionResult GetBooking(int id)
         {
             var value = _bookingService.TGetByID(id);
