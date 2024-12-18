@@ -42,7 +42,7 @@ namespace SingalRApi.Controllers
             return Ok("Müşteri Yorum Bilgisi Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteTestimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);
@@ -66,7 +66,7 @@ namespace SingalRApi.Controllers
             return Ok("Müşteri Yorum Bilgisi Güncellendi");
         }
 
-        [HttpGet("GetTestimonial")]
+        [HttpGet("{id}")]
         public IActionResult GetTestimonial(int id)
         {
             var values = _testimonialService.TGetByID(id);
