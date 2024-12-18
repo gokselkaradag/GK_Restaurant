@@ -38,7 +38,7 @@ namespace SingalRApi.Controllers
             return Ok("Hakkımda Kısmı Başarılı Eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
@@ -61,7 +61,7 @@ namespace SingalRApi.Controllers
             return Ok("Hakkımda Alanı Güncellendi");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
