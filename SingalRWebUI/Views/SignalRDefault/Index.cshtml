@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts
+{
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+    <div class="cotent">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <script type="text/javascript">
+                            $(document).ready(() =>{
+                                                        var connection = new signalR.HubConnectionBuilder()
+                            .withUrl("https://localhost:7112/signalrhub")
+                            .build();
+
+                                $("#connstatus").text(connection.state);
+
+                                connection.start().then(() => {
+                                    $("#connstatus").text(connection.state);
+                                }).catch((err) => {console.log(err)});
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-success">
+            Bağlantının Durumu: <strong id="connstatus"></strong>
+        </div>
+    </div>
+</div>

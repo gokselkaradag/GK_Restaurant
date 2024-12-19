@@ -4,6 +4,7 @@ using SingalR.BusinessLayer.Concrete;
 using SingalR.DataAccessLayer.Abstract;
 using SingalR.DataAccessLayer.Concrete;
 using SingalR.DataAccessLayer.EntityFramework;
+using SingalRApi.Hubs;
 using System.Reflection;
 
 namespace SingalRApi
@@ -13,6 +14,19 @@ namespace SingalRApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials()
+                          .SetIsOriginAllowed(origin => true);
+                });
+            });
+
+            builder.Services.AddSignalR();
 
             builder.Services.AddDbContext<SingalRContext>();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -64,12 +78,14 @@ namespace SingalRApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"));
             }
 
+            app.UseCors("CorsPolicy");
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+            app.MapHub<SignalRHub>("/signalrhub");
 
             app.Run();
         }
