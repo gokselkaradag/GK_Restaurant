@@ -8,5 +8,10 @@ namespace SingalRWebUI.Controllers
         {
             return View();
         }
+
+        public IActionResult IndexTwo()
+        {
+            return View();
+        }
     }
 }
