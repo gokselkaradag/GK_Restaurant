@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SingalR.DataAccessLayer.Concrete;
 
@@ -11,9 +12,11 @@ using SingalR.DataAccessLayer.Concrete;
 namespace SingalR.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SingalRContext))]
-    partial class SingalRContextModelSnapshot : ModelSnapshot
+    [Migration("20241224124302_mig_add_order_orderdetail")]
+    partial class mig_add_order_orderdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,7 +220,7 @@ namespace SingalR.DataAccessLayer.Migrations
 
                     b.HasKey("OrderID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("SingalR.EntityLayer.Entities.OrderDetail", b =>
@@ -249,7 +252,7 @@ namespace SingalR.DataAccessLayer.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("SingalR.EntityLayer.Entities.Product", b =>
