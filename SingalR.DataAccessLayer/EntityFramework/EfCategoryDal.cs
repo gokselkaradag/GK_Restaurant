@@ -15,5 +15,23 @@ namespace SingalR.DataAccessLayer.EntityFramework
         public EfCategoryDal(SingalRContext context) : base(context)
         {
         }
+
+        public int ActiveCategoryCount()
+        {
+            using var context = new SingalRContext();
+            return context.Categories.Where(x => x.CategoryStatus == true).Count();
+        }
+
+        public int CategoryCount()
+        {
+            using var context = new SingalRContext();
+            return context.Categories.Count();
+        }
+
+        public int PassiveCategoryCount()
+        {
+            using var context = new SingalRContext();
+            return context.Categories.Where(x => x.CategoryStatus == false).Count();
+        }
     }
 }

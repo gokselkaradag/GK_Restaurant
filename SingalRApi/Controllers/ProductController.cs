@@ -29,6 +29,48 @@ namespace SingalRApi.Controllers
             return Ok(value);
         }
 
+        [HttpGet("ProductCount")]
+        public IActionResult ProductCount()
+        {
+            var value = _productService.TProductCount();
+            return Ok(value);
+        }
+
+        [HttpGet("ProductNameByMaxPrice")]
+        public IActionResult ProductNameByMaxPrice()
+        {
+            var value = _productService.TProductNameByMaxPrice();
+            return Ok(value);
+        }
+
+        [HttpGet("ProductNameByMinPrice")]
+        public IActionResult ProductNameByMinPrice()
+        {
+            var value = _productService.TProductNameByMinPrice();
+            return Ok(value);
+        }
+
+        [HttpGet("ProductPriceAvg")]
+        public IActionResult ProductPriceAvg()
+        {
+            var value = _productService.TProductPriceAvg();
+            return Ok(value);
+        }
+
+        [HttpGet("ProductCountCategoryNameHamburger")]
+        public IActionResult ProductCountCategoryNameHamburger()
+        {
+            var value = _productService.TProductCountCategoryNameHamburger();
+            return Ok(value);
+        }
+
+        [HttpGet("ProductCountCategoryNameDrink")]
+        public IActionResult ProductCountCategoryNameDrink()
+        {
+            var value = _productService.TProductCountCategoryNameDrink();
+            return Ok(value);
+        }
+
         [HttpGet("ProductListWithCategory")]
         public IActionResult ProductListWithCategory()
         {

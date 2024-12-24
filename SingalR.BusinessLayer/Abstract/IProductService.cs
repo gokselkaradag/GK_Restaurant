@@ -10,5 +10,12 @@ namespace SingalR.BusinessLayer.Abstract
     public interface IProductService : IGenericService<Product>
     {
         List<Product> TGetProductsWithCategories();
+
+        int TProductCount();
+        int TProductCountCategoryNameHamburger();
+        int TProductCountCategoryNameDrink();
+        decimal TProductPriceAvg();
+        string TProductNameByMaxPrice();
+        string TProductNameByMinPrice();
     }
 }

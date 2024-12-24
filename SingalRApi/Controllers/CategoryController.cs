@@ -27,6 +27,27 @@ namespace SingalRApi.Controllers
             return Ok(value);
         }
 
+        [HttpGet("CategoryCount")]
+        public IActionResult CategoryCount()
+        {
+            var value = _categoryService.TCategoryCount();
+            return Ok(value);
+        }
+
+        [HttpGet("PassiveCategoryCount")]
+        public IActionResult PassiveCategoryCount()
+        {
+            var value = _categoryService.TPassiveCategoryCount();
+            return Ok(value);
+        }
+
+        [HttpGet("ActiveCategoryCount")]
+        public IActionResult ActiveCategoryCount()
+        {
+            var value = _categoryService.TActiveCategoryCount();
+            return Ok(value);
+        }
+
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {

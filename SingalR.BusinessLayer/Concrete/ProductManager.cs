@@ -43,6 +43,36 @@ namespace SingalR.BusinessLayer.Concrete
             return _productDal.GetProductsWithCategories();
         }
 
+        public int TProductCount()
+        {
+            return _productDal.ProductCount();
+        }
+
+        public int TProductCountCategoryNameDrink()
+        {
+            return _productDal.ProductCountCategoryNameDrink();
+        }
+
+        public int TProductCountCategoryNameHamburger()
+        {
+            return _productDal.ProductCountCategoryNameHamburger();
+        }
+
+        public string TProductNameByMaxPrice()
+        {
+            return _productDal.ProductNameByMaxPrice();
+        }
+
+        public string TProductNameByMinPrice()
+        {
+            return _productDal.ProductNameByMinPrice();
+        }
+
+        public decimal TProductPriceAvg()
+        {
+            return _productDal.ProductPriceAvg();
+        }
+
         public void TUpdate(Product entity)
         {
             _productDal.Update(entity);
