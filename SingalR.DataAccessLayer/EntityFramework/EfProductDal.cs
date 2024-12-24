@@ -59,6 +59,12 @@ namespace SingalR.DataAccessLayer.EntityFramework
             using var context = new SingalRContext();
             return context.Products.Average(x => x.Price);
         }
+
+        public decimal ProductPriceByHamburger()
+        {
+            using var context = new SingalRContext();
+            return context.Products.Where(x => x.CategoryID == (context.Categories.Where(y => y.CategoryName == "Hamburger").Select(z => z.CategoryID).FirstOrDefault())).Average(z => z.Price);
+        }
     }
 }
 
