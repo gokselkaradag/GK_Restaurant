@@ -67,6 +67,9 @@ namespace SingalRApi
             builder.Services.AddScoped<IMoneyCaseService, MoneyCaseManager>();
             builder.Services.AddScoped<IMoneyCaseDal, EfMoneyCaseDal>();
 
+            builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
+            builder.Services.AddScoped<IMenuTableDal, EfMenuTableDal>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
