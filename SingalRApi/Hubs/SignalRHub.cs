@@ -1,16 +1,33 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using SingalR.BusinessLayer.Abstract;
 using SingalR.DataAccessLayer.Concrete;
 
 namespace SingalRApi.Hubs
 {
     public class SignalRHub : Hub
     {
-        SingalRContext context = new SingalRContext();
+        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
 
-        public async Task SendCategoryCount()
+        public SignalRHub(ICategoryService categoryService, IProductService productService)
         {
-            var value = context.Categories.Count();
+            _categoryService = categoryService;
+            _productService = productService;
+        }
+
+        public async Task SendStatistic()
+        {
+            var value = _categoryService.TCategoryCount();
             await Clients.All.SendAsync("ReceiveCategoryCount", value);
+
+            var valuetwo = _productService.TProductCount();
+            await Clients.All.SendAsync("ReceiveProductCount", valuetwo);
+
+            var valueactive = _categoryService.TActiveCategoryCount();
+            await Clients.All.SendAsync("ReceiveActiveCategoryCount", valueactive);
+
+            var valuepas = _categoryService.TPassiveCategoryCount();
+            await Clients.All.SendAsync("ReceivePassiveCategoryCount", valuepas);
         }
     }
 }
