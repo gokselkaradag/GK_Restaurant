@@ -8,11 +8,17 @@ namespace SingalRApi.Hubs
     {
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IMoneyCaseService _moneyCaseService;
+        private readonly IMenuTableService _menuTableService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService)
         {
             _categoryService = categoryService;
             _productService = productService;
+            _orderService = orderService;
+            _moneyCaseService = moneyCaseService;
+            _menuTableService = menuTableService;
         }
 
         public async Task SendStatistic()
@@ -28,6 +34,39 @@ namespace SingalRApi.Hubs
 
             var valuepas = _categoryService.TPassiveCategoryCount();
             await Clients.All.SendAsync("ReceivePassiveCategoryCount", valuepas);
+
+            var valuepro = _productService.TProductCountCategoryNameHamburger();
+            await Clients.All.SendAsync("ReceiveProductCountCategoryNameHamburger", valuepro);
+
+            var valueprodrink = _productService.TProductCountCategoryNameDrink();
+            await Clients.All.SendAsync("ReceiveProductCountCategoryNameDrink", valueprodrink);
+
+            var valueavg = _productService.TProductPriceAvg();
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", valueavg.ToString("0.00") + "₺");
+
+            var valuemax = _productService.TProductNameByMaxPrice();
+            await Clients.All.SendAsync("ReceiveProductNameByMaxPrice", valuemax);
+
+            var valuemin = _productService.TProductNameByMinPrice();
+            await Clients.All.SendAsync("ReceiveProductNameByMinPrice", valuemin);
+
+            var valuehamburger = _productService.TProductPriceByHamburger();
+            await Clients.All.SendAsync("ReceiveProductPriceByHamburger", valuehamburger.ToString("0.00") + "₺");
+
+            var valueorder = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", valueorder);
+
+            var valueactiveorder = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", valueactiveorder);
+
+            var valuelastorder = _orderService.TLastOrderPrice();
+            await Clients.All.SendAsync("ReceiveLastOrderPrice", valuelastorder.ToString("0.00") + "₺");
+
+            var valuemoney = _moneyCaseService.TTotalMoneyCaseAmount();
+            await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", valuemoney.ToString("0.00") + "₺");
+
+            var valuemenu = _menuTableService.TMenuTableCount();
+            await Clients.All.SendAsync("ReceiveMenuTableCount", valuemenu);
         }
     }
 }
