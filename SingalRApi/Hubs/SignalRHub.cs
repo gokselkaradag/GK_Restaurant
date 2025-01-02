@@ -68,5 +68,17 @@ namespace SingalRApi.Hubs
             var valuemenu = _menuTableService.TMenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableCount", valuemenu);
         }
+
+        public async Task SendProgress()
+        {
+            var value = _moneyCaseService.TTotalMoneyCaseAmount();
+            await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value.ToString("0.00") + "₺");
+
+            var valueorder = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", valueorder);
+
+            var valuemenu = _menuTableService.TMenuTableCount();
+            await Clients.All.SendAsync("ReceiveMenuTableCount", valuemenu);
+        }
     }
 }
