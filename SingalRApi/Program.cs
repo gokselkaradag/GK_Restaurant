@@ -73,6 +73,9 @@ namespace SingalRApi
             builder.Services.AddScoped<ISliderService, SliderManager>();
             builder.Services.AddScoped<ISliderDal, EfSliderDal>();
 
+            builder.Services.AddScoped<IBasketService, BasketManager>();
+            builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
