@@ -6,6 +6,7 @@ using SingalR.DataAccessLayer.Concrete;
 using SingalR.DataAccessLayer.EntityFramework;
 using SingalRApi.Hubs;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace SingalRApi
 {
@@ -75,6 +76,11 @@ namespace SingalRApi
 
             builder.Services.AddScoped<IBasketService, BasketManager>();
             builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
+            builder.Services.AddControllersWithViews()
+                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = 
+                    ReferenceHandler.IgnoreCycles);
+
 
             // Add services to the container.
 

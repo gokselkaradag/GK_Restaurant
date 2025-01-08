@@ -1,4 +1,5 @@
-﻿using SingalR.DataAccessLayer.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using SingalR.DataAccessLayer.Abstract;
 using SingalR.DataAccessLayer.Concrete;
 using SingalR.DataAccessLayer.Repositories;
 using SingalR.EntityLayer.Entities;
@@ -19,7 +20,7 @@ namespace SingalR.DataAccessLayer.EntityFramework
         public List<Basket> GetBasketByMenuTableNumber(int id)
         {
             using var context = new SingalRContext();
-            var values = context.Baskets.Where(x => x.MenuTableID == id).ToList();
+            var values = context.Baskets.Where(x => x.MenuTableID == id).Include(y => y.Product).ToList();
             return values;
         }
     }
