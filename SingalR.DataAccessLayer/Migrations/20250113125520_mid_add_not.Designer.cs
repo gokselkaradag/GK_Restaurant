@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SingalR.DataAccessLayer.Concrete;
 
@@ -11,9 +12,11 @@ using SingalR.DataAccessLayer.Concrete;
 namespace SingalR.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SingalRContext))]
-    partial class SingalRContextModelSnapshot : ModelSnapshot
+    [Migration("20250113125520_mid_add_not")]
+    partial class mid_add_not
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,10 +292,6 @@ namespace SingalR.DataAccessLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
