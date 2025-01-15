@@ -95,6 +95,9 @@ namespace SingalRApi.Hubs
         {
             var values = _notificationService.TNotificationCountByStatusFalse();
             await Clients.All.SendAsync("ReceiveNotificationCountByFalse", values);
+
+            var notifcationListByFalse = _notificationService.TGetAllNotificationByFalse();
+            await Clients.All.SendAsync("ReceiveNotificationListByFalse", notifcationListByFalse);
         }
     }
 }

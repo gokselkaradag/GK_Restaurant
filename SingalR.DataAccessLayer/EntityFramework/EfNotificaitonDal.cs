@@ -28,5 +28,21 @@ namespace SingalR.DataAccessLayer.EntityFramework
             return context.Notifications.Where(x => x.Status == false).Count();
             
         }
+
+        public void NotificationStatusChangeToFalse(int id)
+        {
+            using var context = new SingalRContext();
+            var value = context.Notifications.Find(id);
+            value.Status = false;
+            context.SaveChanges();
+        }
+
+        public void NotificationStatusChangeToTrue(int id)
+        {
+            using var context = new SingalRContext();
+            var value = context.Notifications.Find(id);
+            value.Status = true;
+            context.SaveChanges();
+        }
     }
 }
