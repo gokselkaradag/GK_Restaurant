@@ -99,5 +99,11 @@ namespace SingalRApi.Hubs
             var notifcationListByFalse = _notificationService.TGetAllNotificationByFalse();
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", notifcationListByFalse);
         }
+
+        public async Task GetMenuTableStatus()
+        {
+            var values = _menuTableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", values);
+        }
     }
 }
