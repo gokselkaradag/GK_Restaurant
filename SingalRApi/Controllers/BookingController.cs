@@ -34,6 +34,7 @@ namespace SingalRApi.Controllers
                 Name = createBookingDto.Name,
                 PersonCount = createBookingDto.PersonCount,
                 Phone = createBookingDto.Phone,
+                Description = createBookingDto.Description
             };
 
             _bookingService.TAdd(booking);
@@ -59,6 +60,7 @@ namespace SingalRApi.Controllers
                 Name = updateBookingDto.Name,
                 PersonCount = updateBookingDto.PersonCount,
                 Phone = updateBookingDto.Phone,
+                Description = updateBookingDto.Description
             };
 
             _bookingService.TUpdate(booking);

@@ -14,7 +14,7 @@
         <script type="text/javascript">
             $(document).ready(() =>{
                 var connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:7112/signalrhub")
+            .withUrl("https://localhost:7112/SignalRHub")
             .build();
 
                 $("#connstatus").text(connection.state);

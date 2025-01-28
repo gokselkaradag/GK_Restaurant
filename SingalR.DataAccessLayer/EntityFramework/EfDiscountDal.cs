@@ -15,5 +15,21 @@ namespace SingalR.DataAccessLayer.EntityFramework
         public EfDiscountDal(SingalRContext context) : base(context)
         {
         }
+
+        public void ChangeStatusToFalse(int id)
+        {
+            using var context = new SingalRContext();
+            var values = context.Discounts.Find(id);
+            values.Status = false;
+            context.SaveChanges();
+        }
+
+        public void ChangeStatusToTrue(int id)
+        {
+            using var context = new SingalRContext();
+            var values = context.Discounts.Find(id);
+            values.Status = false;
+            context.SaveChanges();
+        }
     }
 }

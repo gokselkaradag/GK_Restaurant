@@ -57,5 +57,19 @@ namespace SingalRApi.Controllers
             var value = _discountService.TGetByID(id);
             return Ok(_mapper.Map<GetDiscountDto>(value));
         }
+
+        [HttpGet("ChangeStatusToTrue/{id}")]
+        public IActionResult ChangeStatusToTrue(int id)
+        {
+            _discountService.TChangeStatusToTrue(id);
+            return Ok("İndirim Aktif Edildi");
+        }
+
+        [HttpGet("ChangeStatusToFalse/{id}")]
+        public IActionResult ChangeStatusToFalse(int id)
+        {
+            _discountService.TChangeStatusToFalse(id);
+            return Ok("İndirim Pasif Edildi");
+        }
     }
 }
