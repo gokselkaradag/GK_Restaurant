@@ -71,5 +71,19 @@ namespace SingalRApi.Controllers
             var value = _bookingService.TGetByID(id);
             return Ok(value);
         }
+
+        [HttpGet("BookingStatusApproved/{id}")]
+        public IActionResult BookingStatusApproved(int id)
+        {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok("Başarılı Bir Şekilde Onaylandı");
+        }
+
+        [HttpGet("BookingStatusCancelled/{id}")]
+        public IActionResult BookingStatusCancelled(int id)
+        {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Başarılı Bir Şekilde İptal Edildi");
+        }
     }
 }
