@@ -1,3 +1,6 @@
+using SingalR.DataAccessLayer.Concrete;
+using SingalR.EntityLayer.Entities;
+
 namespace SingalRWebUI
 {
     public class Program
@@ -6,6 +9,8 @@ namespace SingalRWebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<SingalRContext>();
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SingalRContext>();
             builder.Services.AddHttpClient();
 
             // Add services to the container.
