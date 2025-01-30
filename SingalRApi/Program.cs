@@ -80,6 +80,9 @@ namespace SingalRApi
             builder.Services.AddScoped<INotificationService, NotificationManager>();
             builder.Services.AddScoped<INotificationDal, EfNotificaitonDal>();
 
+            builder.Services.AddScoped<IMessageService, MessageManager>();
+            builder.Services.AddScoped<IMessageDal, EfMessageDal>();
+
             builder.Services.AddControllersWithViews()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = 
                     ReferenceHandler.IgnoreCycles);
