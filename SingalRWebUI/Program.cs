@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using SingalR.DataAccessLayer.Concrete;
 using SingalR.EntityLayer.Entities;
 
@@ -9,12 +12,22 @@ namespace SingalRWebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
             builder.Services.AddDbContext<SingalRContext>();
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SingalRContext>();
             builder.Services.AddHttpClient();
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(opt =>
+            {
+                opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+            });
+
+            builder.Services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/Login/Index";
+            });
 
             var app = builder.Build();
 
@@ -28,6 +41,7 @@ namespace SingalRWebUI
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
