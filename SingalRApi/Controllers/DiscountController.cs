@@ -71,5 +71,11 @@ namespace SingalRApi.Controllers
             _discountService.TChangeStatusToFalse(id);
             return Ok("İndirim Pasif Edildi");
         }
+
+        [HttpGet("GetListByStatusTrue")]
+        public IActionResult GetListByStatusTrue()
+        {
+            return Ok(_discountService.TGetListByStatusTrue());
+        }
     }
 }
