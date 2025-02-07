@@ -80,11 +80,26 @@ namespace SingalRApi.Hubs
             var value = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount", value.ToString("0.00") + "₺");
 
-            var valueorder = _orderService.TActiveOrderCount();
-            await Clients.All.SendAsync("ReceiveActiveOrderCount", valueorder);
+            var value2 = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", value2);
 
-            var valuemenu = _menuTableService.TMenuTableCount();
-            await Clients.All.SendAsync("ReceiveMenuTableCount", valuemenu);
+            var value3 = _menuTableService.TMenuTableCount();
+            await Clients.All.SendAsync("ReceiveMenuTableCount", value3);
+
+            var value5 = _productService.TProductPriceAvg();
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", value5);
+
+            var value6 = _productService.TProductPriceByHamburger();
+            await Clients.All.SendAsync("ReceiveAvgPriceByHamburger", value6);
+
+            var value7 = _productService.TProductCountCategoryNameDrink();
+            await Clients.All.SendAsync("ReceiveProductCountByCategoryNameDrink", value7);
+
+            var value8 = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", value8);
+
+            var value9 = _productService.TProductPriceBySteakBurger();
+            await Clients.All.SendAsync("ReceiveProductPriceBySteakBurger", value9);
         }
 
         public async Task GetBookingList()

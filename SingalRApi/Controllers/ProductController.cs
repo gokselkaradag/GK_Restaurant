@@ -64,6 +64,13 @@ namespace SingalRApi.Controllers
             return Ok(value);
         }
 
+        [HttpGet("ProductPriceBySteakBurger")]
+        public IActionResult ProductPriceBySteakBurger()
+        {
+            var value = _productService.TProductPriceBySteakBurger();
+            return Ok(value);
+        }
+
         [HttpGet("ProductCountCategoryNameHamburger")]
         public IActionResult ProductCountCategoryNameHamburger()
         {

@@ -18,5 +18,6 @@ namespace SingalR.BusinessLayer.Abstract
         string TProductNameByMaxPrice();
         string TProductNameByMinPrice();
         decimal TProductPriceByHamburger();
+        decimal TProductPriceBySteakBurger();
     }
 }
