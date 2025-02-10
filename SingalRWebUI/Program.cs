@@ -31,6 +31,14 @@ namespace SingalRWebUI
 
             var app = builder.Build();
 
+            app.UseStatusCodePages(async statuscode =>
+            {
+                if (statuscode.HttpContext.Response.StatusCode == 404)
+                {
+                    statuscode.HttpContext.Response.Redirect("/Error/NotFound404Page/");
+                }
+            });
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

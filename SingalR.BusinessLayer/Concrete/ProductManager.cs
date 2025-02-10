@@ -33,6 +33,11 @@ namespace SingalR.BusinessLayer.Concrete
             return _productDal.GetByID(id);
         }
 
+        public List<Product> TGetLast6Products()
+        {
+            return _productDal.GetLast6Products();
+        }
+
         public List<Product> TGetListAll()
         {
             return _productDal.GetListAll();

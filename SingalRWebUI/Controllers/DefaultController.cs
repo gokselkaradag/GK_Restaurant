@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SingalRWebUI.Dtos.MessageDto;
 using System.Net.Http;
@@ -6,6 +7,7 @@ using System.Text;
 
 namespace SingalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class DefaultController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -35,7 +37,7 @@ namespace SingalRWebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7112/api/Message", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Default");
             }
             return View();
         }

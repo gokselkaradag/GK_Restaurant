@@ -19,5 +19,7 @@ namespace SingalR.DataAccessLayer.Abstract
         string ProductNameByMinPrice();
         decimal ProductPriceByHamburger();
         decimal ProductPriceBySteakBurger();
+        List<Product> GetLast6Products();
+
     }
 }

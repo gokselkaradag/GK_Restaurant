@@ -133,5 +133,12 @@ namespace SingalRApi.Controllers
             var values = _productService.TGetByID(id);
             return Ok(_mapper.Map<GetProductDto>(values));
         }
+
+        [HttpGet("GetLast6Products")]
+        public IActionResult GetLast6Products()
+        {
+            var value = _productService.TGetLast6Products();
+            return Ok(value);
+        }
     }
 }

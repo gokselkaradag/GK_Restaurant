@@ -31,6 +31,7 @@ namespace SingalRApi.Controllers
         public IActionResult CreateMessage(CreateMessageDto createMessageDto)
         {
             createMessageDto.Status = false;
+            createMessageDto.SendDate = DateTime.Now;
             var value = _mapper.Map<Message>(createMessageDto);
             _messageService.TAdd(value);
             return Ok("Mesajlar Eklendi");
@@ -48,6 +49,7 @@ namespace SingalRApi.Controllers
         public IActionResult UpdateMessage(UpdateMessageDto updateMessageDto)
         {
             updateMessageDto.Status = false;
+            updateMessageDto.SendDate = DateTime.Now;
             var value = _mapper.Map<Message>(updateMessageDto);
             _messageService.TUpdate(value);
             return Ok("Mesajlar Güncellendi");

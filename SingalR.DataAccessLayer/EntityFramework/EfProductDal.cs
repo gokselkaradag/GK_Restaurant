@@ -17,6 +17,13 @@ namespace SingalR.DataAccessLayer.EntityFramework
         {
         }
 
+        public List<Product> GetLast6Products()
+        {
+            var context = new SingalRContext();
+            var values = context.Products.Take(6).ToList();
+            return values;
+        }
+
         public List<Product> GetProductsWithCategories()
         {
             var context = new SingalRContext();
