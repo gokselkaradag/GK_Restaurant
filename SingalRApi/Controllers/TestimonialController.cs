@@ -30,15 +30,8 @@ namespace SingalRApi.Controllers
         [HttpPost]
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
-            _testimonialService.TAdd(new Testimonial()
-            {
-                Comment = createTestimonialDto.Comment,
-                ImageUrl = createTestimonialDto.ImageUrl,
-                Name = createTestimonialDto.Name,
-                Status = createTestimonialDto.Status,
-                Title = createTestimonialDto.Title,
-            });
-
+            var value = _mapper.Map<Testimonial>(createTestimonialDto);
+            _testimonialService.TAdd(value);
             return Ok("Müşteri Yorum Bilgisi Eklendi");
         }
 
@@ -53,16 +46,8 @@ namespace SingalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
-            _testimonialService.TUpdate(new Testimonial()
-            {
-                TestimonialID = updateTestimonialDto.TestimonialID,
-                Comment = updateTestimonialDto.Comment,
-                ImageUrl = updateTestimonialDto.ImageUrl,
-                Name = updateTestimonialDto.Name,
-                Status = updateTestimonialDto.Status,
-                Title = updateTestimonialDto.Title,
-            });
-
+            var value = _mapper.Map<Testimonial>(updateTestimonialDto);
+            _testimonialService.TUpdate(value);
             return Ok("Müşteri Yorum Bilgisi Güncellendi");
         }
 
@@ -70,7 +55,7 @@ namespace SingalRApi.Controllers
         public IActionResult GetTestimonial(int id)
         {
             var values = _testimonialService.TGetByID(id);
-            return Ok(values);
+            return Ok(_mapper.Map<GetTestimonialDto>(values));
         }
     }
 }

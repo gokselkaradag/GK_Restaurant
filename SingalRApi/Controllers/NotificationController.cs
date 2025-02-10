@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SingalR.BusinessLayer.Abstract;
 using SingalR.DtoLayer.NotificationDto;
@@ -11,16 +12,19 @@ namespace SingalRApi.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService, IMapper mapper)
         {
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult NotificationList()
         {
-            return Ok(_notificationService.TGetListAll());
+            var values = _notificationService.TGetListAll();
+            return Ok(_mapper.Map<List<ResultNotificationDto>>(values));
         }
 
         [HttpGet("NotificationCountByStatusFalse")]
@@ -38,15 +42,10 @@ namespace SingalRApi.Controllers
         [HttpPost]
         public IActionResult CreateNotification(CreateNotificationDto createNotificationDto)
         {
-            Notification notification = new Notification
-            {
-                Type = createNotificationDto.Type,
-                Description = createNotificationDto.Description,
-                Status = false,
-                Icon = createNotificationDto.Icon,
-                Date = Convert.ToDateTime(DateTime.Now.ToShortDateString())
-            };
-            _notificationService.TAdd(notification);
+            createNotificationDto.Status = false;
+            createNotificationDto.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            var value = _mapper.Map<Notification>(createNotificationDto);
+            _notificationService.TAdd(value);
             return Ok("Ekleme İşlemi Başarılı");
         }
 
@@ -62,22 +61,14 @@ namespace SingalRApi.Controllers
         public IActionResult GetNotification(int id)
         {
             var value = _notificationService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetNotificationDto>(value));
         }
 
         [HttpPut]
         public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto)
         {
-            Notification notification = new Notification
-            {
-                NotificationID = updateNotificationDto.NotificationID,
-                Type = updateNotificationDto.Type,
-                Description = updateNotificationDto.Description,
-                Status = updateNotificationDto.Status,
-                Icon = updateNotificationDto.Icon,
-                Date = updateNotificationDto.Date
-            };
-            _notificationService.TUpdate(notification);
+            var value = _mapper.Map<Notification>(updateNotificationDto);
+            _notificationService.TUpdate(value);
             return Ok("Güncelleme İşlemi Başarılı");
         }
 

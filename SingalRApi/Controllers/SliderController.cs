@@ -30,16 +30,8 @@ namespace SingalRApi.Controllers
         [HttpPost]
         public IActionResult CreateSlider(CreateSliderDto createSliderDto)
         {
-            _sliderService.TAdd(new Slider()
-            {
-                DescriptionOne = createSliderDto.DescriptionOne,
-                DescriptionTwo = createSliderDto.DescriptionTwo,
-                DescriptionThree = createSliderDto.DescriptionThree,
-                TitleOne = createSliderDto.TitleOne,
-                TitleTwo = createSliderDto.TitleTwo,
-                TitleThree = createSliderDto.TitleThree,
-            });
-
+            var value = _mapper.Map<Slider>(createSliderDto);
+            _sliderService.TAdd(value);
             return Ok("Özellikler Eklendi");
         }
 
@@ -54,17 +46,8 @@ namespace SingalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateSlider(UpdateSliderDto updateSliderDto)
         {
-            _sliderService.TUpdate(new Slider()
-            {
-                SliderID = updateSliderDto.SliderID,
-                DescriptionOne = updateSliderDto.DescriptionOne,
-                DescriptionTwo = updateSliderDto.DescriptionTwo,
-                DescriptionThree = updateSliderDto.DescriptionThree,
-                TitleOne = updateSliderDto.TitleOne,
-                TitleTwo = updateSliderDto.TitleTwo,
-                TitleThree = updateSliderDto.TitleThree,
-            });
-
+            var value = _mapper.Map<Slider>(updateSliderDto);
+            _sliderService.TUpdate(value);
             return Ok("Özellikler Güncellendi");
         }
 
@@ -72,7 +55,7 @@ namespace SingalRApi.Controllers
         public IActionResult GetSlider(int id)
         {
             var values = _sliderService.TGetByID(id);
-            return Ok(values);
+            return Ok(_mapper.Map<GetSliderByDto>(values));
         }
     }
 }

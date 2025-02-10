@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SingalR.BusinessLayer.Abstract;
 using SingalR.DtoLayer.MenuTableDto;
@@ -11,10 +12,12 @@ namespace SingalRApi.Controllers
     public class MenuTablesController : ControllerBase
     {
         private readonly IMenuTableService _menuTableService;
+        private readonly IMapper _mapper;
 
-        public MenuTablesController(IMenuTableService menuTableService)
+        public MenuTablesController(IMenuTableService menuTableService, IMapper mapper)
         {
             _menuTableService = menuTableService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -27,12 +30,9 @@ namespace SingalRApi.Controllers
         [HttpPost]
         public IActionResult CreateMenuTable(CreateMenuTable createMenuTable)
         {
-            MenuTable menuTable = new MenuTable()
-            {
-                Name = createMenuTable.Name,
-                Status = false
-            };
-            _menuTableService.TAdd(menuTable);
+            createMenuTable.Status = false;
+            var value = _mapper.Map<MenuTable>(createMenuTable);
+            _menuTableService.TAdd(value);
             return Ok("Menu Kısmı Başarılı Eklendi");
         }
 
@@ -47,14 +47,9 @@ namespace SingalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateMenuTable(UpdateMenuTable updateMenuTable)
         {
-            MenuTable menuTable = new MenuTable()
-            {
-                Name = updateMenuTable.Name,
-                MenuTableID = updateMenuTable.MenuTableID,
-                Status = false
-            };
-
-            _menuTableService.TUpdate(menuTable);
+            updateMenuTable.Status = false;
+            var value = _mapper.Map<MenuTable>(updateMenuTable);
+            _menuTableService.TUpdate(value);
             return Ok("Menu Alanı Güncellendi");
         }
 
@@ -62,7 +57,7 @@ namespace SingalRApi.Controllers
         public IActionResult GetMenuTable(int id)
         {
             var value = _menuTableService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetMenuTableDto>(value));
         }
 
         [HttpGet("MenuTableCount")]
