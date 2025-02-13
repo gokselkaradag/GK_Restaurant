@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SingalR.DataAccessLayer\SingalR.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\SingalR.DtoLayer\SingalR.DtoLayer.csproj" />
   </ItemGroup>
 
 </Project>

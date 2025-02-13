@@ -1,6 +1,8 @@
+using FluentValidation;
 using Microsoft.OpenApi.Models;
 using SingalR.BusinessLayer.Abstract;
 using SingalR.BusinessLayer.Concrete;
+using SingalR.BusinessLayer.ValidationRules.BookingValidations;
 using SingalR.DataAccessLayer.Abstract;
 using SingalR.DataAccessLayer.Concrete;
 using SingalR.DataAccessLayer.EntityFramework;
@@ -82,6 +84,8 @@ namespace SingalRApi
 
             builder.Services.AddScoped<IMessageService, MessageManager>();
             builder.Services.AddScoped<IMessageDal, EfMessageDal>();
+
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>();
 
             builder.Services.AddControllersWithViews()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = 

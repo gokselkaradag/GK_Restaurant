@@ -68,6 +68,10 @@
                                 <input type="date" class="form-control" asp-for="Date">
                                 <span asp-validation-for="Date" class="text-danger"></span>
                             </div>
+                            <div>
+                                <input type="text" class="form-control" placeholder="Açıklama yazınız..." asp-for="Description" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
                             <div class="btn_box">
                                 <button>
                                     Yerinizi Ayırtın
@@ -79,7 +83,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="map_container ">
-                        <iframe src="@ViewBag.location" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.628124163896!2d32.83256447603237!3d39.92733757152255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f1e395f7f83%3A0xbc73a1a54df813ea!2sMebusevleri%2C%20An%C4%B1tkabir%2C%2006570%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1739198505658!5m2!1str!2str" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
