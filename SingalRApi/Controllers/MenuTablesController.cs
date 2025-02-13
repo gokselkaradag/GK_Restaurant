@@ -24,7 +24,7 @@ namespace SingalRApi.Controllers
         public IActionResult MenuTableList()
         {
             var values = _menuTableService.TGetListAll();
-            return Ok(values);
+            return Ok(_mapper.Map<List<ResultMenuTable>>(values));
         }
 
         [HttpPost]

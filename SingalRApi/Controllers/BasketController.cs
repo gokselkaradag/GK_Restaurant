@@ -52,9 +52,9 @@ namespace SingalRApi.Controllers
             {
                 ProductID = createBasketDto.ProductID,
                 Count = 1,
-                MenuTableID = 3,
+                MenuTableID = createBasketDto.MenuTableID,
                 Price = context.Products.Where(x => x.ProductID == createBasketDto.ProductID).Select(x => x.Price).FirstOrDefault(),
-                TotalPrice = 0
+                TotalPrice = createBasketDto.TotalPrice,
             });
             return Ok();
         }

@@ -15,8 +15,11 @@ namespace SingalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            ViewBag.v = id;
+            //TempData["x"] = id;
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7112/api/Product/ProductListWithCategory");
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -25,10 +28,18 @@ namespace SingalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id)
+        public async Task<IActionResult> AddBasket(int id, int menuTableId)
         {
-            CreateBasketDto createBasketDto = new CreateBasketDto();
-            createBasketDto.ProductID = id;
+            if (menuTableId == 0)
+            {
+                return BadRequest("MenuTableId 0 geliyor.");
+            }
+
+            CreateBasketDto createBasketDto = new CreateBasketDto
+            {
+                ProductID = id,
+                MenuTableID = menuTableId
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
