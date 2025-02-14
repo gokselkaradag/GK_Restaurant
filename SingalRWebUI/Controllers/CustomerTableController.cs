@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SingalRWebUI.Dtos.MenuTableDtos;
 
 namespace SingalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class CustomerTableController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

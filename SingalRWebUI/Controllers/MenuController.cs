@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SingalRWebUI.Dtos.BasketDtos;
 using SingalRWebUI.Dtos.ProductDtos;
@@ -6,6 +7,7 @@ using System.Text;
 
 namespace SingalRWebUI.Controllers
 {
+    [AllowAnonymous]
     public class MenuController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -44,6 +46,10 @@ namespace SingalRWebUI.Controllers
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7112/api/Basket", stringContent);
+
+            var client2 = _httpClientFactory.CreateClient();
+            await client2.GetAsync("https://localhost:7112/api/MenuTables/ChangeMenuTableStatusToTrue?id=" + menuTableId);
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

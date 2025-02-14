@@ -65,5 +65,19 @@ namespace SingalRApi.Controllers
         {
             return Ok(_menuTableService.TMenuTableCount());
         }
+
+        [HttpGet("ChangeMenuTableStatusToTrue")]
+        public IActionResult ChangeMenuTableStatusToTrue(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusToTrue(id);
+            return Ok("İşlem Başarılı");
+        }
+
+        [HttpGet("ChangeMenuTableStatusToFalse")]
+        public IActionResult ChangeMenuTableStatusToFalse(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusToFalse(id);
+            return Ok("İşlem Başarılı");
+        }
     }
 }
